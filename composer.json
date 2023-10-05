@@ -18,8 +18,8 @@
     ],
     "extra": {
         "think":{
-            "config":{
-                "doc": "src/config/doc.php"
+            "common/lib":{
+                "doc": "src/config/Dok.php"
             }
         }
     }
