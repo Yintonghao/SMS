@@ -15,5 +15,12 @@
         {
             "name": "大菠萝"
         }
-    ]
+    ],
+    "extra": {
+        "think":{
+            "config":{
+                "doc": "src/config/doc.php"
+            }
+        }
+    }
 }
