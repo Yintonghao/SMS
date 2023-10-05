@@ -15,6 +15,11 @@ class Intercept extends Base
         parent::__construct();
 
         $this->config = (new Setting())->getConfig($this->dataKey);
+
+        if(!$this->config){
+            throw new \Exception('未获取到短信配置,请前往生成配置');
+        }
+
         $this->holdBackIP($sms_type,$business_id,$IP);
     }
 
