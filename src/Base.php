@@ -2,6 +2,7 @@
 
 namespace Mydom\Sms;
 
+use app\common\lib\Dok;
 use think\facade\Cache;
 use think\facade\Config;
 
@@ -24,13 +25,22 @@ class Base
   `update_time` int(11) DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
-    
+    //枚举数据
+    public $Enumdata = [];
+    public $redisName = '';
+    public $config_key_data = '__SMS_CONFIG__';
     public function __construct()
     {
         $database = Config::get('database.connections.mysql');
         $this->database = $database['database'];
         $this->prefix = $database['prefix'];
+        $this->tableName = $this->prefix.= $this->tableName;
+        $this->Enumdata = (new Dok())->config;
+        
+        $store = Config::get('cache.stores');
+        if(!isset($store['redis'])){
+            throw new \Exception('请在config/cache.php文件中增加redis配置。');
+        }
+        $this->redisName = 'redis';
     }
-    
-
 }

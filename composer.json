@@ -15,12 +15,5 @@
         {
             "name": "大菠萝"
         }
-    ],
-    "extra": {
-        "think":{
-            "common/lib":{
-                "Dok": "src/config/Dok.php"
-            }
-        }
-    }
+    ]
 }
