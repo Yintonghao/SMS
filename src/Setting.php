@@ -111,10 +111,14 @@ class Setting extends Base
      */
     public function deleteConfig($type,$business)
     {
-        return Db::table($this->tableName)
+        $res =  Db::table($this->tableName)
             ->where('type',$type)
             ->where('business',$business)
             ->delete();
+
+        Cache::store($this->redisName)->set($this->config_key_data,json_encode($this->getConfigList(),256));
+
+        return $res;
     }
 
 
