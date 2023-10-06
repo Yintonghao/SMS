@@ -16,15 +16,16 @@ class Base
     public $tableName = 'sms_setting';
     //表结构
     public $table = "CREATE TABLE `%s` (
-  `type` int(6) NOT NULL DEFAULT '0' COMMENT '1-手机号  2-IP 3-UID',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `business` int(6) NOT NULL DEFAULT '0' COMMENT '业务ID',
+  `type` int(6) NOT NULL DEFAULT '0' COMMENT '1-手机号  2-IP 3-UID',
   `second` int(6) NOT NULL DEFAULT '0' COMMENT '发送频率，秒',
   `num` int(6) NOT NULL DEFAULT '0' COMMENT '发送限制，次数',
   `sort` int(6) NOT NULL DEFAULT '0' COMMENT '排序',
   `create_time` int(11) DEFAULT NULL COMMENT '创建时间',
   `update_time` int(11) DEFAULT NULL COMMENT '更新时间',
-  PRIMARY KEY (`type`,`business`) USING BTREE
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='短信频发设置';";
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='短信频发设置';";
     //枚举数据
     public $Enumdata = [];
     public $redisName = '';
