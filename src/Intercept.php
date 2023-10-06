@@ -24,6 +24,12 @@ class Intercept extends Base
     {
         parent::__construct();
         $this->config = (new Setting())->getConfigSms();
+        if(!$businessID){
+            throw new \Exception('缺少必要参数',10500);
+        }
+        if(!$mobile && !$IP){
+            throw new \Exception('缺少必要参数',10500);
+        }
         $this->businessID = $businessID;
         $this->mobile = $mobile;
         $this->IP = $IP;
@@ -39,11 +45,13 @@ class Intercept extends Base
                 case 1:
                     switch ($item['type']){
                         case 1:
+                            if(!$this->mobile) continue;
                             $jz = $item['second'].':'.$this->mobile;
                             $key = $item['business'].'_'.$item['type'].':'.$jz;
                             $this->holdM($key, $item,$jz);
                             break;
                         case 2:
+                            if(!$this->IP) continue;
                             $jz = $item['second'].':'.$this->IP;
                             $key = $item['business'].'_'.$item['type'].':'.$jz;
                             $this->holdIP($key, $item,$jz);
@@ -63,6 +71,8 @@ class Intercept extends Base
         if(count($this->IPexception) > 0){
             throw new \Exception(array_values($this->IPexception)[0],10500);
         }
+
+        return true;
     }
 
     private function holdM($key,$data,$jz)
