@@ -72,11 +72,14 @@ class Setting extends Base
         list($typeArr, $business) = $this->Enumdata;
         $typeArr = array_column($typeArr, null, 'type');
         $business = array_column($business, null, 'business');
-        $data = Db::table($this->tableName)->order('sort asc')->select()->each(function ($item) use ($typeArr, $business) {
-            $item['type_name'] = $typeArr[$item['type']]['name'];
-            $item['business_name'] = $business[$item['business']]['name'];
-            return $item;
-        })->toArray();
+        $data = Db::table($this->tableName)
+            ->order('sort asc')
+            ->select()
+            ->each(function ($item) use ($typeArr, $business) {
+                $item['type_name'] = $typeArr[$item['type']]['name'];
+                $item['business_name'] = $business[$item['business']]['name'];
+                return $item;
+            })->toArray();
 
         return $data;
     }
