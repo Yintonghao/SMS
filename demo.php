@@ -1,6 +1,9 @@
 <?php
 
 namespace sms;
+use app\common\lib\Dok;
+use Mydom\Sms\Intercept;
+
 /**
  * 调用示例
  */
@@ -27,7 +30,10 @@ class demo
         //$obj->deleteConfig(1);
 
         //频繁拦截
-        //$obj = new Intercept(Dok::BUSINESS_LOGIN,$param['mobile'],'127.0.0.1');
+        //$obj = new Intercept(Dok::BUSINESS_LOGIN);
+        //$obj->mobile = $param['mobile'];
+        //$obj->IP = '127.0.0.1';
         //$obj->holdBack();
+        //$obj->sendBeforeInc();
     }
 }
