@@ -26,11 +26,21 @@ class Intercept extends Base
             throw new \Exception('缺少必要参数', 10500);
         }
         $this->config = (new Setting())->getConfigSms();
-
+        $this->businessID = $businessID;
         if($this->config){
-            $newConfig = array_column($this->config,null,'business');
-            $this->config = $newConfig[$businessID];
+            $this->getConfing();
         }
+    }
+
+    private function getConfing()
+    {
+        $newConfig = [];
+        foreach ($this->config as $value){
+            if($value['business'] == $this->businessID){
+                $newConfig[] = $value;
+            }
+        }
+        $this->config = $newConfig;
     }
 
     /**
