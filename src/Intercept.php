@@ -42,16 +42,13 @@ class Intercept extends Base
                 case 1:
                     switch ($item['type']) {
                         case 1:
-                            $jz = $item['second'] . ':' . $this->mobile;
-                            $key = $item['business'] . '_' . $item['type'] . ':' . $jz;
-                            $this->hold($key, $item);
+                            $sole = $this->mobile;
                             break;
                         case 2:
-                            $jz = $item['second'] . ':' . $this->IP;
-                            $key = $item['business'] . '_' . $item['type'] . ':' . $jz;
-                            $this->hold($key, $item);
+                            $sole = $this->IP;
                             break;
                     }
+                    $this->hold($item,$sole);
                     break;
                 default:
                     //待开发
@@ -62,12 +59,15 @@ class Intercept extends Base
         return true;
     }
 
-    private function hold($key, $data)
+    private function hold($data,$sole)
     {
+        $key =  $data['business'] . '_' . $data['type'] . ':' . $data['second'] . $sole;
+
         $this->allKey[] = ['key' => $key, 'second' => $data['second']];
+
         $redis = Cache::store($this->redisName);
 
-        $num = $redis->get($key);
+        $num = $redis->get($key) ?? 0;
 
         if ($num + 1 > $data['num']) {
             throw new \Exception("频繁发送短信,请稍后再试", 10500);
@@ -80,16 +80,22 @@ class Intercept extends Base
      */
     public function sendBeforeInc()
     {
+        $ret = [];
         foreach ($this->allKey as $value) {
             $redis = Cache::store($this->redisName);
 
             $key = $value['key'];
 
             $num = $redis->incr($key, 1);
+            if($num === false){
+                throw new \Exception('服务器异常,请稍后再试');
+            }
 
             if ($num == 1) {
                 $redis->expire($key, $value['second']);
             }
+            $ret[$value['key']] = $num;
         }
+        return $ret;
     }
 }
