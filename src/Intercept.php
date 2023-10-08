@@ -2,6 +2,7 @@
 
 namespace Mydom\Sms;
 
+use app\common\lib\Dok;
 use think\facade\Cache;
 
 /**
@@ -53,10 +54,10 @@ class Intercept extends Base
         }
         foreach ($this->config as $index => $item) {
             switch ($item['type']) {
-                case 1:
+                case Dok::TYPE_MOBILE:
                     $sole = $this->mobile;
                     break;
-                case 2:
+                case Dok::TYPE_IP:
                     $sole = $this->IP;
                     break;
             }
