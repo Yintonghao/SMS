@@ -22,11 +22,15 @@ class Intercept extends Base
     public function __construct($businessID)
     {
         parent::__construct();
-        $this->config = (new Setting())->getConfigSms();
         if (!$businessID) {
             throw new \Exception('缺少必要参数', 10500);
         }
-        $this->businessID = $businessID;
+        $this->config = (new Setting())->getConfigSms();
+
+        if($this->config){
+            $newConfig = array_column($this->config,null,'business');
+            $this->config = $newConfig[$businessID];
+        }
     }
 
     /**
@@ -38,23 +42,15 @@ class Intercept extends Base
             throw new \Exception('缺少必要参数', 10500);
         }
         foreach ($this->config as $index => $item) {
-            switch ($item['business']) {
+            switch ($item['type']) {
                 case 1:
-                    switch ($item['type']) {
-                        case 1:
-                            $sole = $this->mobile;
-                            break;
-                        case 2:
-                            $sole = $this->IP;
-                            break;
-                    }
-                    $this->hold($item,$sole);
+                    $sole = $this->mobile;
                     break;
-                default:
-                    //待开发
-                    $key = null;
+                case 2:
+                    $sole = $this->IP;
                     break;
             }
+            $this->hold($item, $sole);
         }
         return true;
     }
