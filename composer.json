@@ -17,7 +17,7 @@
         }
     ],
     "extra": {
-        "test-tp6":{
+        "think":{
             "config":{
                 "Dok": "src/config/Dok.php"
             }
