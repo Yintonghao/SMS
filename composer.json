@@ -16,7 +16,13 @@
             "name": "大菠萝"
         }
     ],
-    "scripts": {
-        "move-file": "copy /src/config/Dok.php /app/common/"
+    "extra": {
+        "think":{
+            "app":{
+                "common": {
+                    "Dok": "src/config/Dok.php"
+                }
+            }
+        }
     }
 }
