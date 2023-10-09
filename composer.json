@@ -16,14 +16,12 @@
             "name": "大菠萝"
         }
     ],
-    "extra": {
-        "think":{
-            "app":{
-                "Dok": "src/config/Dok.php"
-            },
-            "extenf":{
-                "Dok": "src/config/Dok.php"
-            }
-        }
+    "scripts": {
+        "post-install-cmd": [
+            "Mydom\\Sms\\CopyClass::copyFiles"
+        ],
+        "post-update-cmd": [
+            "Mydom\\Sms\\CopyClass::copyFiles"
+        ]
     }
 }
