@@ -18,7 +18,10 @@
     ],
     "extra": {
         "think":{
-            "config":{
+            "app":{
+                "Dok": "src/config/Dok.php"
+            },
+            "extenf":{
                 "Dok": "src/config/Dok.php"
             }
         }
