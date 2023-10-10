@@ -15,5 +15,10 @@
         {
             "name": "大菠萝"
         }
-    ]
+    ],
+    "scripts": {
+        "post-install-cmd": [
+            "php move-files.php"
+        ]
+    }
 }
