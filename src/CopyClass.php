@@ -24,6 +24,9 @@ class CopyClass
         $appPath .= $filename;
         if (!file_exists($appPath)) {
             copy($sourceDir, $appPath);
+            file_put_contents('mkdir.log',"=== 文件写入成功,{$appPath}",FILE_APPEND);
+        }else{
+            file_put_contents('mkdir.log',"=== 文件写入成功,{$appPath}",FILE_APPEND);
         }
     }
 }
