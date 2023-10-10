@@ -12,7 +12,7 @@ $destinationDirectory = ltrim($destinationDirectory,DIRECTORY_SEPARATOR);
 
 foreach ($filesToMove as $file) {
     $source = __DIR__ . '/' . $file;
-    $destination = $destinationDirectory . $destinationDirectory . 'app\\common\\lib\\' . basename($file);
+    $destination = $destinationDirectory . 'app\\common\\lib\\' . basename($file);
 
     if (file_exists($source)) {
         if (!file_exists(dirname($destination))) {
