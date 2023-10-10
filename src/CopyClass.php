@@ -6,11 +6,24 @@ class CopyClass
 {
     public static function copyFiles()
     {
-        $sourceDir = __DIR__ . '/path/to/source';
-        $targetDir = __DIR__ . '/path/to/target';
+        $filename = 'Dok.php';
+        $sourceDir = __DIR__ . '\\config\\' . $filename;
+        if (!file_exists($sourceDir)) {
+            exit('源文件不存在');
+        }
 
-        // 实际的文件拷贝逻辑，可以使用PHP内置的函数，如copy()或rename()等
+        $appPath = app()->getAppPath();
+        $targetDir = 'common\\lib';
+        foreach (explode('\\', $targetDir) as $value) {
+            $appPath .= $value.'\\';
+            if (!is_dir($appPath)) {
+                mkdir($appPath);
+            }
+        }
 
-        copy('config/Dok.php',getcwd().'\\app\\Dok.php');
+        $appPath .= $filename;
+        if (!file_exists($appPath)) {
+            copy($sourceDir, $appPath);
+        }
     }
 }
