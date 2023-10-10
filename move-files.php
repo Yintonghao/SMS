@@ -1,9 +1,9 @@
 <?php
 $filesToMove = [
-    'src/config/Dok.php',
+    '/src/config/Dok.php',
 
 ];
-$destinationDirectory = 'app/common/lib';
+$destinationDirectory = 'static';
 foreach ($filesToMove as $file) {
     $source = __DIR__ . '/' . $file;
     $destination = __DIR__ . '/' . $destinationDirectory . '/' . basename($file);
