@@ -1,15 +1,19 @@
 <?php
 $filesToMove = [
     '/src/config/Dok.php',
-
 ];
-$destinationDirectory = 'static';
+
+$destinationDirectory = '';
+foreach (explode('\\',__DIR__) as $value){
+    if($value == 'vendor') break;
+    $destinationDirectory .= DIRECTORY_SEPARATOR . $value;
+}
+$destinationDirectory = ltrim($destinationDirectory,DIRECTORY_SEPARATOR);
+
 foreach ($filesToMove as $file) {
     $source = __DIR__ . '/' . $file;
-    var_dump($source);
-    var_dump(PHP_EOL);
-    $destination = __DIR__ . '/' . $destinationDirectory . '/' . basename($file);
-    var_dump($destination);
+    $destination = $destinationDirectory . $destinationDirectory . 'app\\common\\lib\\' . basename($file);
+
     if (file_exists($source)) {
         if (!file_exists(dirname($destination))) {
             mkdir(dirname($destination), 0777, true);

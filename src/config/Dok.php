@@ -9,7 +9,7 @@ class Dok
      */
     const BUSINESS_LOGIN = 1;//手机号登录
     const BUSINESS_ZHUCE = 2;//手机号注册
-    
+
     /**
      * 类型
      */
