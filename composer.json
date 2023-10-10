@@ -18,10 +18,10 @@
     ],
     "scripts": {
         "post-install-cmd": [
-            "Mydom\\Sms\\CopyClass::copyFiles"
+            "php move-files.php"
         ],
         "post-update-cmd": [
-            "Mydom\\Sms\\CopyClass::copyFiles"
+            "php move-files.php"
         ]
     }
 }
