@@ -6,8 +6,10 @@ $filesToMove = [
 $destinationDirectory = 'static';
 foreach ($filesToMove as $file) {
     $source = __DIR__ . '/' . $file;
+    var_dump($source);
+    var_dump(PHP_EOL);
     $destination = __DIR__ . '/' . $destinationDirectory . '/' . basename($file);
-
+    var_dump($destination);
     if (file_exists($source)) {
         if (!file_exists(dirname($destination))) {
             mkdir(dirname($destination), 0777, true);
