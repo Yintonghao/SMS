@@ -35,7 +35,7 @@ class ChuangLanSms extends Base
             'report' => $needstatus,
         );
         $result = $this->curlPost( self::API_SEND_URL, $postArr);
-        dd($result);
+
         return $result;
     }
 
