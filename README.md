@@ -13,6 +13,9 @@ git push origin v1.0.1
 ~~~
 调用示例
 ~~~
+/*
+ * 频发拦截
+ */
 public function sms()
 {
     $param = $this->request->param();
@@ -40,4 +43,20 @@ public function sms()
     $obj->holdBack();
     $obj->sendBeforeInc();
 }
+
+/*
+ * 发送短信
+ */
+public function send()
+{
+    //创蓝平台
+    $appid = '你的应用id';
+    $secret = '你的应用密钥';
+    $obj = Factory::createObject('ChuangLanSms',$appid,$secret);
+    $code = $obj->getCode(6);
+    $msg = "您的验证码为: {$code}，请妥善保管";
+    $obj->sendSMS(15350800151,$msg);
+    //后续还会增加其它平台
+} 
+
 ~~~
